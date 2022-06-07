@@ -1,5 +1,5 @@
 # PlanificadorHorarioProlog
-Explicación del planificador horario creado por Markus Triska(https://www.metalevel.at/simsttab/).
+Explicación del planificador horario creado por Markus Triska (https://www.metalevel.at/simsttab/).
 
 
 ## Introducción, ¿Qué es Prolog?.
@@ -13,5 +13,12 @@ Frente a estos lenguajes de programación se encuentran los lenguajes de program
 Por poner un ejemplo de como funciona un lenguaje declarativo, Prolog, permite la resolución de problemas usando las Claúsulas de Horn, las cuales permiten realizar siguiendo la regla de "Si X es un antecedente, entonces es verdad el consecuente", siguiendo esta regla ( con la única variación de que la forma de escribir estas clausulas en Prolog es primero el consecuente y luego el antecende) Prolog ejecuta su algoritmo de backtracking y permite unificar las soluciones con dos posibles salidas, true si la ejecución termina en éxito o false, si termina en fracaso.
 Gracias a este método de resolución se nos permite el uso de predicados reversibles, lo cual nos permite intercambiar los roles de entrada o salida de las variables pasadas por parametros a los predicados, permitiendo, con un solo predicado, poder extraer diferente información según lo que desee el programador.
 
+## Programación Declarativa con Restricciones ( CLP(Z) )
+## Aplicación de la programación declarativa a un planificador de horarios.
 
+# Código del Planificador de Horarios
+## Lógica del programa
 
+# Conclusiones
+
+# Referencias
