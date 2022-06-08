@@ -1,8 +1,10 @@
-# PlanificadorHorarioProlog
+# Planificador Horarios en Prolog
 Explicación del planificador horario creado por Markus Triska (https://www.metalevel.at/simsttab/).
 
 
-## Introducción, ¿Qué es Prolog?.
+#Introducción 
+
+##¿Qué es Prolog?.
 
 Prolog, por sus siglas (Programmation en Logique) es un lenguaje de programación declarativo usado principalmente en el campo de la inteligencia artificial, fué creado a principio de los años 70 en la Universidad de Aix-Marseille I (Francia) por un profesor y un alumno de doctorado. Se empezó a popularizar en la década de los 80 cuando aparecieron los primeros intérpretes para micro-ordenadores de 8 bits y para ordenadores domésticos de 16 bits, junto la adopción del mismo para el desarrollo del proyecto de la quinta generación de computadoras (Proyecto del gobierno de Japón orientado a crear clases de computadores que utilizarían técnicas y tecnologías de inteligencia artificial punteras en ese momento tanto en hardware como en software). En la actualidad, el lenguaje Prolog es usado para introducir la programación logica/declarativa en entornos académicos.
 
