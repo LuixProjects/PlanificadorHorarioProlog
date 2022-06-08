@@ -19,6 +19,27 @@ Gracias a este método de resolución se nos permite el uso de predicados revers
 ## Aplicación de la programación declarativa a un planificador de horarios.
 
 # Código del Planificador de Horarios
+## Documento de Requisitos
+
+Para el funcionamiento del código principal de este planificador, necesitamos un documento el cual nos defina los requisitos para determinar una clasificación posible para las distintas restricciones de horas entre clases, profesores y asignaturas impartidas por los profesores.
+Vamos a ver las estructuras de informacion que tenemos dentro de este documento:
+````prolog
+ slots_per_week (+N). /* Requisito que impone que haya N huecos en una misma semana. Ej: slots_per_week (35).*/
+ slots_per_day (+N).  /* Requisito que impone que haya N huecos en un mismo día. Ej: slots_per_day (7).*/
+
+ class_subject_teacher_times (+Class, +Subject, +Teacher, +Times)
+ /* Requisito que impone cuantos huecos de la semana (Times) da cada profesor (Teacher) de cada asignatura (Subject) en cada clase (Class). Ej: class_subject_teacher_times ('1a', sjk, sjk1, 4).*/
+
+ coupling (+Class, +Subject, +Times1, +Times2). /* Requisito que impone que una una asignatura (Subject) sea impartida en una clase (Class) durante 2 huecos consecutivos (Times1 y Times2). Ej: coupling ('1a', sjk, 2, 3).*/
+
+ class_freeslot (+Class, +Slot). /* Requisito que impone que una clase (Class) no tenga ninguna asignatura en el hueco Slot de la semana. Ej: class_freeslot ('1a', 0).*/
+
+ /* Revisar esta de room_alloc, porque no se si está bien del todo*/
+ room_alloc(+Room, +Class, +Subject, +Slot). /* Requisito que impone que un aula (Room) está ocupada por una clase (Class) a la que se le imparte una asignatura (Subject) y en un determinado hueco (Slot). Ej: room_alloc (r1, '1a', sjk, 0).*/
+
+ teacher_freeday (+Teacher, +Day). /* Requisito que impone el dia de descanso (+Day) de un profesor (Teacher). Ej: teacher_freeday (ume1, 4).*/
+````
+
 ## Lógica del programa
 
 # Conclusiones
