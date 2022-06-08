@@ -27,7 +27,7 @@ Vamos a ver las estructuras de informacion que tenemos dentro de este documento:
  slots_per_week (+N). /* Requisito que impone que haya N huecos en una misma semana. Ej: slots_per_week (35).*/
  slots_per_day (+N).  /* Requisito que impone que haya N huecos en un mismo día. Ej: slots_per_day (7).*/
 
- class_subject_teacher_times (+Class, +Subject, +Teacher, +Times)
+ class_subject_teacher_times (+Class, +Subject, +Teacher, +Times).
  /* Requisito que impone cuantos huecos de la semana (Times) da cada profesor (Teacher) de cada asignatura (Subject) en cada clase (Class). Ej: class_subject_teacher_times ('1a', sjk, sjk1, 4).*/
 
  coupling (+Class, +Subject, +Times1, +Times2). /* Requisito que impone que una una asignatura (Subject) sea impartida en una clase (Class) durante 2 huecos consecutivos (Times1 y Times2). Ej: coupling ('1a', sjk, 2, 3).*/
