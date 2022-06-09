@@ -48,5 +48,5 @@ Vamos a ver las estructuras de informacion que tenemos dentro de este documento:
 
 # Referencias
 [1] The Power Of Prolog. Markus Triska: <metalevel.at/prolog>  
-[2] The Power of Prolog Introduction. Markus Triska: <https://www.metalevel.at/prolog/introduction>
-[3] Librería reif. Ulrich Newmerkel: <https://github.com/meditans/reif>
+[2] The Power of Prolog Introduction. Markus Triska: <https://www.metalevel.at/prolog/introduction>  
+[3] Librería reif. Ulrich Newmerkel: <https://github.com/meditans/reif>  
