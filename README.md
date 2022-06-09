@@ -30,6 +30,9 @@ También podemos restringir el dominio de las variables utilizando el predicado 
 
 ## Aplicación de la programación declarativa a un planificador de horarios.
 
+Un horario es el ejemplo perfecto para trabajar con programación con restricciones.  
+Los hechos de prolog (*facts*) se pueden utilizar para especificar los requisitos del horario. De esta forma, la entrada del programa será una lista de hechos que describirán qué restricciones queremos que cumpla nuestro horario [[5]](https://www.metalevel.at/simsttab/).
+
 # Código del Planificador de Horarios
 ## Documento de Requisitos
 
@@ -67,4 +70,5 @@ Finalmente, hemos podido comprender, de forma general, como utilizar el código 
 [1] The Power Of Prolog. Markus Triska: <https://www.metalevel.at/prolog>  
 [2] The Power of Prolog Introduction. Markus Triska: <https://www.metalevel.at/prolog/introduction>  
 [3] Librería reif. Ulrich Newmerkel: <https://github.com/meditans/reif>  
-[4] The Power Of Prolog. CLPZ, Markus Triska: <https://www.metalevel.at/prolog/clpz>
+[4] The Power Of Prolog. CLPZ, Markus Triska: <https://www.metalevel.at/prolog/clpz>  
+[5] The Power Of Prolog. Simsttab, Markus Triska: <https://www.metalevel.at/simsttab/>  
