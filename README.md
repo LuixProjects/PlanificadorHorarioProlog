@@ -24,7 +24,7 @@ Gracias a este método de resolución se nos permite el uso de predicados revers
 
 Para apreciar la aritmética declarativa en Prolog, primero debemos considerar la aritmética sobre los números naturales. Estos están definidos mediante los axiomas de Peano. Sin embargo, existen diversos problemas con la representación de los números que nos ofrecen dichos axiomas. Por ello, en Prolog se utilizan restricciones de dominio finito (CLP(FD) o CLP(Z)). En Prolog, todos los predicados se consideran restricciones. Los más importantes se denominan restricciones aritméticas.  
 
-También podemos restringir el dominio de las variables utilizando el predicado *in*. Además, es posible combinar diferentes restricciones utilizando la propagación de restricciones. [[4]](https://www.metalevel.at/prolog/clpz).
+También podemos restringir el dominio de las variables utilizando el predicado *in*. Además, es posible combinar diferentes restricciones utilizando la propagación de restricciones [[4]](https://www.metalevel.at/prolog/clpz).
 
 
 
