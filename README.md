@@ -20,7 +20,12 @@ Por poner un ejemplo de como funciona un lenguaje declarativo, Prolog, permite l
 
 Gracias a este método de resolución se nos permite el uso de predicados reversibles, lo cual nos permite intercambiar los roles de entrada o salida de las variables pasadas por parametros a los predicados, permitiendo, con un solo predicado, poder extraer diferente información según lo que desee el programador.
 
-## Programación Declarativa con Restricciones ( CLP(Z) )
+## Programación Declarativa con Restricciones ( CLP(Z) )  
+
+[[4]](https://www.metalevel.at/prolog/clpz)
+
+
+
 ## Aplicación de la programación declarativa a un planificador de horarios.
 
 # Código del Planificador de Horarios
@@ -53,3 +58,4 @@ Vamos a ver las estructuras de informacion que tenemos dentro de este documento:
 [1] The Power Of Prolog. Markus Triska: <https://www.metalevel.at/prolog>  
 [2] The Power of Prolog Introduction. Markus Triska: <https://www.metalevel.at/prolog/introduction>  
 [3] Librería reif. Ulrich Newmerkel: <https://github.com/meditans/reif>  
+[4] The Power Of Prolog. CLPZ, Markus Triska: <https://www.metalevel.at/prolog/clpz>
