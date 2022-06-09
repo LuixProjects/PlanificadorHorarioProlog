@@ -63,7 +63,7 @@ Prolog es un lenguaje muy potente para hacer programación con restricciones ya 
 
 
 
-Finalmente, hemos podido comprender, de forma general, como utilizar el código del planificador de horarios de Markus Triska para ajustarlo a ciertas restricciones que nosotros decidamos.
+Finalmente, hemos podido comprender, de forma general, como utilizar el código del planificador de horarios de Markus Triska para ajustarlo a ciertas restricciones que nosotros decidamos. Sin embargo, la parte del formato y de como transformar el programa en una aplicación web no hemos podido entenderla completamente.
 
 
 # Referencias
