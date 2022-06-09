@@ -56,6 +56,13 @@ Vamos a ver las estructuras de informacion que tenemos dentro de este documento:
 
 # Conclusiones
 
+Prolog es un lenguaje muy potente para hacer programación con restricciones ya que, con pocas líneas de código, podemos generar programas complejos que en otros lenguajes de programación ocuparían más código. En este documento hemos visto como funciona el planificador de horarios creado por Markus Triska en Prolog. Para ello hemos desgranado el código que está publicado en su página web línea por línea.
+
+
+
+Finalmente, hemos podido comprender, de forma general, como utilizar el código del planificador de horarios de Markus Triska para ajustarlo a ciertas restricciones que nosotros decidamos.
+
+
 # Referencias
 [1] The Power Of Prolog. Markus Triska: <https://www.metalevel.at/prolog>  
 [2] The Power of Prolog Introduction. Markus Triska: <https://www.metalevel.at/prolog/introduction>  
