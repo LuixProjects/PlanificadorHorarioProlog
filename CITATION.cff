@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Gutierrez Jerez"
+  given-names: "Luis"
+- family-names: "F. Merchán"
+  given-names: "Alberto"
+- family-names: "Gonzalez Gutierrez"
+  given-names: "Manuel Jesús"
+- family-names: "Velázquez Murillo"
+  given-names: "Luis Javier"
+title: "Documento_PlanificadorHorarioProlog"
+version: 1.0.0
+doi: 10.5281/zenodo.1234
+date-released: 2022-06-09
+url: "https://github.com/LuixProyects/PlanificadorHorarioProlog"
