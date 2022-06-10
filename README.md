@@ -121,6 +121,7 @@ A continuación  se adjunta el código comentado.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /* 
+Predicado que será cierto si Rs unifica con con los requirimentos del sistema
 1º Guarda los requisitos en Goal
 2º Guarda en Rs0 la lista de todas las posibles soluciones que cumplan las restricciones no duplicadas y ordenadas
 3º Ejecuta req_with_slots en todo Rs0 y en Rs como salida
@@ -131,24 +132,28 @@ requirements(Rs) :-
         maplist(req_with_slots, Rs0, Rs).
 
 /*
+Predicado que será cierto si R-Slot unifica con una Lista con elementos indeterminados ([_]) del tamaño del numero total de restricciones.
 Asignar a cada restriccion una lista de N huecos
 */
 req_with_slots(R, R-Slots) :- 
         R = req(_,_,_,N), length(Slots, N).
 
 /*
+Predicado que será cierto si Classes unifica con la Lista de las distintas clases existentes ordenadas sin repetir.
 Devuelve en "Classes" la lista de distintas clases que hay ordenadas sin repetir
 */
 classes(Classes) :-
         setof(C, S^N^T^class_subject_teacher_times(C,S,T,N), Classes).
 
 /*
+Predicado que será cierto si Teacher unifica con la Lista de los distintos profesores ordenados sin repetir.
 Devuelve en "Teachers" la lista de distintos profesores que hay ordenadas sin repetir
 */
 teachers(Teachers) :-
         setof(T, C^S^N^class_subject_teacher_times(C,S,T,N), Teachers).
 
 /*
+Predicado que será cierto si Rooms unifica con la Lista de aulas ordenadas sin repetir.
 Devuelve en "Rooms" la lista de aulas que hay ordenadas sin repetir
 */
 rooms(Rooms) :-
@@ -156,6 +161,8 @@ rooms(Rooms) :-
         sort(Rooms0, Rooms).
 
 /*
+Predicado que será cierto si Vars unifica con la lista Requisitos-Posibles soluciones (Siendo posibles soluciones las soluciones que cumplan con las restricciones).
+
 1º Consigue las posibles soluciones en Rs que cumplen los requisitos seguido de una lista vacía de las soluciones
 2º Guarda en Vars la lista vacía del par Requisito-Solucion
 3º Guarda en SPM huecos por semana
@@ -192,6 +199,7 @@ slot_quotient(S, Q) :-
         Q #= S // SPD.
 
 /*
+Predicado que será cierto si Es unifica con los valores de la Lista ES0 con los indices Ws eliminados. //????????????????????????????
 [list_without_nths, without_, without_at_pos0]
 Elimina de la lista Es0 los valores de los indices de Ws y unifica en Es
 */
@@ -210,6 +218,7 @@ without_at_pos0(>, E, Ws0, Ws0) --> [E].
 %:- list_without_nths([a,b,c,d], [1,2], [a,d]).
 
 /*
+Predicado que será cierto si F-S unifica con ??????????????????????????????????????
 1º En S1 se establece el índice de la posicion que ocupa en Slots F
 2º En S2 se establece el índice de la posicion que ocupa en Slots S
 3º Establece que S2 será S1 + 1 para indicar que son 2 clases seguidas
@@ -220,6 +229,7 @@ slots_couplings(Slots, F-S) :-
         S2 #= S1 + 1.
         
 /*
+Predicado que será cierto si Slots unifica con las asignaturas que cumplen las restricciones ???????????????????????????
 1º Establece el orden creciente estricto de los slots vacios
 2º Por cada requisito, saca el coeficiente (en fraccion) de los huecos del requisito
 3º Guarda en Cs todas las clases que son sucesivas de este requisito (clase y asignatura)
@@ -240,12 +250,13 @@ constrain_subject(req(Class, Subj, _Teacher, _Num)-Slots) :-
         strictly_ascending(Qs).
 
 /*
-Es cierto cuando los valores de F son distintos de Vs
+Es cierto cuando los valores de F unifica con los valores distintos de Vs
 */
 all_diff_from(Vs, F) :- 
         maplist(#\=(F), Vs).
 
 /*
+Predicado que será cierto si Class unifica con una lista de clases que cumplen las restricciones Rs.
 1º Filtra según los requisitos los huecos que tiene cada clase para cada asignatura
 2º Guarda en Vs la lista vacía del par Clase-Asignatura 
 3º Restringe para sean únicos los valores de asignaturas de Vs
@@ -261,6 +272,7 @@ constrain_class(Rs, Class) :-
         maplist(all_diff_from(Vs), Frees).
 
 /*
+Predicado que será cierto si Teacher unifica con la Lista de profesores que cumplen las restricciones Rs.
 [tfilter filtra Rs por la condicion 
 teacher_req(Teacher) y lo guarda en Sub]
 1º Filtra según los requisitos los huecos que tiene cada profesor para cada asignatura
@@ -279,6 +291,7 @@ constrain_teacher(Rs, Teacher) :-
         maplist(all_diff_from(Qs), Fs).
 
 /*
+
 1º Comprueba que el par requisito-slot pertenece a la lista de requisitos Reqs
 2º En Var se establece el índice de la posicion que ocupa en Slots Lesson
 */
