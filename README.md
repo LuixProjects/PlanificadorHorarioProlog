@@ -338,6 +338,9 @@ pairs_slots(Ps, Vs) :-
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
+
+A partir de este extracto, se presenta el formato final y su representación en consola, cosas que no nos ha sido posible entender.
+
 1º Instancia en SPW los huecos por semana
 2º Instancia en SPD los huecos por día
 3º Instancia en NumDays la division entera de huecos por semana 
