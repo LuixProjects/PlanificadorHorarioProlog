@@ -49,7 +49,6 @@ Vamos a ver las estructuras de informacion que tenemos dentro de este documento:
 
  class_freeslot (+Class, +Slot). /* Requisito que impone que una clase (Class) no tenga ninguna asignatura en el hueco Slot de la semana. Ej: class_freeslot ('1a', 0).*/
 
- /* Revisar esta de room_alloc, porque no se si está bien del todo*/
  room_alloc(+Room, +Class, +Subject, +Slot). /* Requisito que impone que un aula (Room) está ocupada por una clase (Class) a la que se le imparte una asignatura (Subject) y en un determinado hueco (Slot). Ej: room_alloc (r1, '1a', sjk, 0).*/
 
  teacher_freeday (+Teacher, +Day). /* Requisito que impone el dia de descanso (+Day) de un profesor (Teacher). Ej: teacher_freeday (ume1, 4).*/
