@@ -1,5 +1,5 @@
 # Planificador Horarios en Prolog
-Explicación del planificador horario creado por Markus Triska (https://www.metalevel.at/simsttab/).
+Explicación del [planificador de horarios](https://www.metalevel.at/simsttab/) creado por Markus Triska.
 
 
 # Introducción 
