@@ -129,7 +129,6 @@ Primero unifica la variable *Goal* con los requisitos que se quieren alcanzar. R
 
 ```prolog
 /* 
-Predicado que será cierto si Rs unifica con con los requirimentos del sistema
 1º Guarda los requisitos en Goal
 2º Guarda en Rs0 la lista de todas las posibles soluciones que cumplan las restricciones no duplicadas y ordenadas
 3º Ejecuta req_with_slots en todo Rs0 y en Rs como salida
@@ -147,10 +146,6 @@ Utiliza la capacidad de Prolog de utilizar los predicados de forma reversible pa
 Cabe destacar que R-Slot no es una variable, sino dos variables (R y Slots) separadas por un guion.
 
 ```prolog
-/*
-Predicado que será cierto si Slot unifica con una Lista con elementos indeterminados ([_]) del tamaño del numero total de restricciones.
-Asignar a cada restriccion una lista de N huecos
-*/
 req_with_slots(R, R-Slots) :- 
         R = req(_,_,_,N), length(Slots, N).
 
@@ -163,24 +158,12 @@ Predicado *rooms(-Rooms)* es cierto cuando Classes unifica con el conjunto de la
 Estos tres predicados sirven para obtener una lista de todas las variables del problema.  
 
 ```prolog
-/*
-Predicado que será cierto si Classes unifica con la Lista de las distintas clases existentes ordenadas sin repetir.
-Devuelve en "Classes" la lista de distintas clases que hay ordenadas sin repetir
-*/
 classes(Classes) :-
         setof(C, S^N^T^class_subject_teacher_times(C,S,T,N), Classes).
 
-/*
-Predicado que será cierto si Teacher unifica con la Lista de los distintos profesores ordenados sin repetir.
-Devuelve en "Teachers" la lista de distintos profesores que hay ordenadas sin repetir
-*/
 teachers(Teachers) :-
         setof(T, C^S^N^class_subject_teacher_times(C,S,T,N), Teachers).
 
-/*
-Predicado que será cierto si Rooms unifica con la Lista de aulas ordenadas sin repetir.
-Devuelve en "Rooms" la lista de aulas que hay ordenadas sin repetir
-*/
 rooms(Rooms) :-
         findall(Room, room_alloc(Room,_C,_S,_Slot), Rooms0),
         sort(Rooms0, Rooms).
@@ -205,8 +188,6 @@ A continuación, establece las restricciones de las asignaturas, clases, profeso
 
 ```prolog
 /*
-Predicado que será cierto si Vars unifica con la lista Requisitos-Posibles soluciones (Siendo posibles soluciones las soluciones que cumplan con las restricciones).
-
 1º Consigue las posibles soluciones en Rs que cumplen los requisitos seguido de una lista vacía de las soluciones
 2º Guarda en Vars la lista vacía del par Requisito-Solucion
 3º Guarda en SPM huecos por semana
@@ -251,11 +232,6 @@ slot_quotient(S, Q) :-
 El predicado *list_without_nths(Es0,Ws,Es)* es cierto cuando *Es* unifica con los valores de la lista *Es0* sin los valores que ocupan los índices indicados en *Ws*.
 
 ```prolog
-/*
-Predicado que será cierto si Es unifica con los valores de la Lista ES0 con los indices Ws eliminados. 
-[list_without_nths, without_, without_at_pos0]
-Elimina de la lista Es0 los valores de los indices de Ws y unifica en Es
-*/
 list_without_nths(Es0, Ws, Es) :-
         phrase(without_(Ws, 0, Es0), Es).
 without_([], _, Es) --> seq(Es).
@@ -314,9 +290,6 @@ constrain_subject(req(Class, Subj, _Teacher, _Num)-Slots) :-
 El predicado *all_diff_from(Vs,F)* es cierto cuando los valores de F son distintos de todos los valores de Vs.
 
 ```prolog
-/*
-Es cierto cuando los valores de F unifica con los valores distintos de Vs
-*/
 
 all_diff_from(Vs, F) :- 
         maplist(#\=(F), Vs).
@@ -341,9 +314,6 @@ constrain_class(Rs, Class) :-
         maplist(all_diff_from(Vs), Frees).
 
 /*
-Predicado que será cierto si Teacher unifica con la Lista de profesores que cumplen las restricciones Rs.
-[tfilter filtra Rs por la condicion 
-teacher_req(Teacher) y lo guarda en Sub]
 1º Filtra según los requisitos los huecos que tiene cada profesor para cada asignatura
 2º Guarda en Vs la lista vacía del par Profesor-Asignatura
 3º Restringe para sean únicos los valores de asignaturas de Vs
@@ -398,18 +368,14 @@ strictly_ascending(Ls) :-
         chain(#<, Ls).
 
 ```
-
+El predicado *class_req(C0,req(C1,_S,_T,_N)-_, T)* es cierto cuando C0, C1 y T unifican entre sí.
 ```prolog
-/*
-Se cumple cumple cuando C0, C1 y T son iguales
-*/
 
 class_req(C0, req(C1,_S,_T,_N)-_, T) :- 
         =(C0, C1, T).
-
-/*
-Se cumple cumple cuando T0, T1 y T son iguales
-*/
+```
+El predicado *teacher_req(T0, req(_C,_S,T1,_N)-_, T)* es cierto cuando T0, T1 y T unifican entre sí.
+```prolog
 teacher_req(T0, req(_C,_S,T1,_N)-_, T) :- 
         =(T0,T1,T).
 
