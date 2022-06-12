@@ -39,8 +39,11 @@ Los hechos de prolog (*facts*) se pueden utilizar para especificar los requisito
 Para el funcionamiento del código principal de este planificador, necesitamos un documento el cual nos defina los requisitos para determinar una clasificación posible para las distintas restricciones de horas entre clases, profesores y asignaturas impartidas por los profesores.
 Vamos a ver las estructuras de informacion que tenemos dentro de este documento:
 ````prolog
- slots_per_week (+N). /* Requisito que impone que haya N huecos en una misma semana. Ej: slots_per_week (35).*/
- slots_per_day (+N).  /* Requisito que impone que haya N huecos en un mismo día. Ej: slots_per_day (7).*/
+ slots_per_week (+N).
+ /* Requisito que impone que haya N huecos en una misma semana. Ej: slots_per_week (35).*/
+ 
+ slots_per_day (+N).
+ /* Requisito que impone que haya N huecos en un mismo día. Ej: slots_per_day (7).*/
 
  class_subject_teacher_times (+Class, +Subject, +Teacher, +Times).
  /* Requisito que impone cuantos huecos de la semana (Times) da cada profesor (Teacher) de cada asignatura (Subject) en cada clase (Class). Ej: class_subject_teacher_times ('1a', sjk, sjk1, 4).*/
