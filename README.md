@@ -56,7 +56,10 @@ Vamos a ver las estructuras de informacion que tenemos dentro de este documento:
 
 ## Lógica del programa
 
-A continuación  se adjunta el código comentado.
+A continuación  se adjunta el código comentado:
+
+Cabecera del programa: Apartado donde se importan las bibliotecas que se van a utilizar y se pone una breve explicación sobre la utilidad del programa.  
+
 ```prolog
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
    Simsttab -- Simplistic school time tabler
@@ -118,7 +121,13 @@ A continuación  se adjunta el código comentado.
    room, are constrained to be all_different/1.
    Labeling is performed on all slot variables.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+```
+Predicado *requirements(-Rs)* es cierto cuando Rs unifica con los requisitos del sistema.  
 
+Funciona de la siguiente forma:
+Primero unifica la variable *Goal* con los requisitos que se quieren alcanzar. Rs0 unifica con la lista de posibles soluciones que cumplen las restricciones de *Goal*. Esta lista es un conjunto ordenado y sin repeticiones. Por último, se llama a la función *req_with_slots* para cada miembro de la lista de soluciones.  
+
+```prolog
 /* 
 Predicado que será cierto si Rs unifica con con los requirimentos del sistema
 1º Guarda los requisitos en Goal
@@ -130,13 +139,30 @@ requirements(Rs) :-
         setof(req(Class,Subject,Teacher,Number), Goal, Rs0),
         maplist(req_with_slots, Rs0, Rs).
 
+```
+
+Predicado *req_with_slots(-R, -R-Slots)* es cierto cuando Slots unifica con una lista del tamaño del número total de restricciones.  
+
+Utiliza la capacidad de Prolog de utilizar los predicados de forma reversible para crear una lista de tamaño N.  
+Cabe destacar que R-Slot no es una variable, sino dos variables (R y Slots) separadas por un guion.
+
+```prolog
 /*
-Predicado que será cierto si R-Slot unifica con una Lista con elementos indeterminados ([_]) del tamaño del numero total de restricciones.
+Predicado que será cierto si Slot unifica con una Lista con elementos indeterminados ([_]) del tamaño del numero total de restricciones.
 Asignar a cada restriccion una lista de N huecos
 */
 req_with_slots(R, R-Slots) :- 
         R = req(_,_,_,N), length(Slots, N).
 
+```
+
+Predicado *classes(-Classes)* es cierto cuando Classes unifica con el conjunto de las clases disponibles.
+Predicado *teachers(-Teachers)* es cierto cuando Classes unifica con el conjunto de las clases disponibles.
+Predicado *rooms(-Rooms)* es cierto cuando Classes unifica con el conjunto de las clases disponibles.  
+
+Estos tres predicados sirven para obtener una lista de todas las variables del problema.  
+
+```prolog
 /*
 Predicado que será cierto si Classes unifica con la Lista de las distintas clases existentes ordenadas sin repetir.
 Devuelve en "Classes" la lista de distintas clases que hay ordenadas sin repetir
@@ -160,6 +186,9 @@ rooms(Rooms) :-
         sort(Rooms0, Rooms).
 
 /*
+```
+
+```prolog
 Predicado que será cierto si Vars unifica con la lista Requisitos-Posibles soluciones (Siendo posibles soluciones las soluciones que cumplan con las restricciones).
 
 1º Consigue las posibles soluciones en Rs que cumplen los requisitos seguido de una lista vacía de las soluciones
