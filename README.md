@@ -185,10 +185,26 @@ rooms(Rooms) :-
         findall(Room, room_alloc(Room,_C,_S,_Slot), Rooms0),
         sort(Rooms0, Rooms).
 
-/*
 ```
 
+Predicado *requirements_variables(Rs,Vars)* es cierto cuando Vars unifica con una lista de Posibles soluciones.  
+Para ello:
+Primero utiliza el predicado *requirements(Rs)* para conseguir las posibles soluciones que cumplen los requisitos seguida de una lista vacía de tamaño N.  
+
+Con el predicado *pairs_slots(Rs,Vars)* unifica Vars con una lista vacía del par Requisito-Solucion. La variable SPM unifica con los huecos que hay por cada semana y 
+unifica la variable Max con el número de huecos por semana menos 1.  
+
+Establece el dominio de las variables (0..Max). Cada valor del dominio representará cada uno de los días de la semana:  
+0 - Lunes  
+1 - Martes  
+2 - Miércoles  
+3 - Jueves  
+4 - Viernes  
+
+A continuación, establece las restricciones de las asignaturas, clases, profesores y aulas.  
+
 ```prolog
+/*
 Predicado que será cierto si Vars unifica con la lista Requisitos-Posibles soluciones (Siendo posibles soluciones las soluciones que cumplan con las restricciones).
 
 1º Consigue las posibles soluciones en Rs que cumplen los requisitos seguido de una lista vacía de las soluciones
@@ -218,6 +234,11 @@ requirements_variables(Rs, Vars) :-
         maplist(constrain_class(Rs), Classes),
         maplist(constrain_room(Rs), Rooms).
 
+```
+El predicado *slot_quotient(+S,-Q)* es cierto cuando Q unifica con el cociente entre el número de Slots totales y el número de Slots por día. 
+
+```prolog
+
 /*
 1º Instancia en SPD los huecos por día
 2º Establece en Q el cociente en fracción de lo que ocupa del total por día
@@ -226,8 +247,12 @@ slot_quotient(S, Q) :-
         slots_per_day(SPD),
         Q #= S // SPD.
 
+```
+El predicado *list_without_nths(Es0,Ws,Es)* es cierto cuando *Es* unifica con los valores de la lista *Es0* sin los valores que ocupan los índices indicados en *Ws*.
+
+```prolog
 /*
-Predicado que será cierto si Es unifica con los valores de la Lista ES0 con los indices Ws eliminados. //????????????????????????????
+Predicado que será cierto si Es unifica con los valores de la Lista ES0 con los indices Ws eliminados. 
 [list_without_nths, without_, without_at_pos0]
 Elimina de la lista Es0 los valores de los indices de Ws y unifica en Es
 */
@@ -241,12 +266,19 @@ without_([W|Ws], Pos0, [E|Es]) -->
         without_(Ws1, Pos, Es).
 without_at_pos0(=, _, [_|Ws], Ws) --> [].
 without_at_pos0(>, E, Ws0, Ws0) --> [E].
+```
 
+Aquí se ofrece un ejemplo del predicado anterior.
+
+```prolog
 %:- list_without_nths([a,b,c,d], [3], [a,b,c]).
 %:- list_without_nths([a,b,c,d], [1,2], [a,d]).
+```
 
+El predicado *slots_couplings(Slots,F-S)* se encarga de que dos asignaturas se impartan de forma consecutiva.  
+
+```prolog
 /*
-Predicado que será cierto si F-S unifica con ??????????????????????????????????????
 1º En S1 se establece el índice de la posicion que ocupa en Slots F
 2º En S2 se establece el índice de la posicion que ocupa en Slots S
 3º Establece que S2 será S1 + 1 para indicar que son 2 clases seguidas
@@ -255,7 +287,9 @@ slots_couplings(Slots, F-S) :-
         nth0(F, Slots, S1),
         nth0(S, Slots, S2),
         S2 #= S1 + 1.
-        
+```
+
+```prolog
 /*
 Predicado que será cierto si Slots unifica con las asignaturas que cumplen las restricciones ???????????????????????????
 1º Establece el orden creciente estricto de los slots vacios
@@ -276,13 +310,19 @@ constrain_subject(req(Class, Subj, _Teacher, _Num)-Slots) :-
         sort(Seconds0, Seconds),
         list_without_nths(Qs0, Seconds, Qs),
         strictly_ascending(Qs).
+```
 
+```prolog
 /*
 Es cierto cuando los valores de F unifica con los valores distintos de Vs
 */
+
 all_diff_from(Vs, F) :- 
         maplist(#\=(F), Vs).
 
+```
+
+```prolog
 /*
 Predicado que será cierto si Class unifica con una lista de clases que cumplen las restricciones Rs.
 1º Filtra según los requisitos los huecos que tiene cada clase para cada asignatura
@@ -298,7 +338,10 @@ constrain_class(Rs, Class) :-
         all_different(Vs),
         findall(S, class_freeslot(Class,S), Frees),
         maplist(all_diff_from(Vs), Frees).
+```
 
+
+```prolog
 /*
 Predicado que será cierto si Teacher unifica con la Lista de profesores que cumplen las restricciones Rs.
 [tfilter filtra Rs por la condicion 
@@ -318,15 +361,20 @@ constrain_teacher(Rs, Teacher) :-
         maplist(slot_quotient, Vs, Qs),
         maplist(all_diff_from(Qs), Fs).
 
-/*
+```
 
+```prolog
+/*
 1º Comprueba que el par requisito-slot pertenece a la lista de requisitos Reqs
 2º En Var se establece el índice de la posicion que ocupa en Slots Lesson
 */
 sameroom_var(Reqs, r(Class,Subject,Lesson), Var) :-
         memberchk(req(Class,Subject,_Teacher,_Num)-Slots, Reqs),
         nth0(Lesson, Slots, Var).
+```
 
+
+```prolog
 /*
 1º Busca las habitaciones que cumplan las restricciones RReqs
 2º Unifica cuando las habitaciones distintas cumplen los requisitos
@@ -337,6 +385,10 @@ constrain_room(Reqs, Room) :-
         maplist(sameroom_var(Reqs), RReqs, Roomvars),
         all_different(Roomvars).
 
+```
+
+
+```prolog
 /*
 #< es una lista de variables de dominio finito que son 
 una cadena con respecto al orden parcial Ls,
@@ -345,9 +397,13 @@ en el orden en que aparecen en la lista.
 strictly_ascending(Ls) :- 
         chain(#<, Ls).
 
+```
+
+```prolog
 /*
 Se cumple cumple cuando C0, C1 y T son iguales
 */
+
 class_req(C0, req(C1,_S,_T,_N)-_, T) :- 
         =(C0, C1, T).
 
@@ -357,6 +413,9 @@ Se cumple cumple cuando T0, T1 y T son iguales
 teacher_req(T0, req(_C,_S,T1,_N)-_, T) :- 
         =(T0,T1,T).
 
+```
+
+```prolog
 /*
 1º Elimina de la Hash table Ps los Keys para quedarse en Vs0 solo con los values
 2º Une la lista de values de Vs0 a la lista de Vs
@@ -379,9 +438,9 @@ pairs_slots(Ps, Vs) :-
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 /*
-
+```
 A partir de este extracto, se presenta el formato final y su representación en consola, cosas que no nos ha sido posible entender.
-
+```prolog
 1º Instancia en SPW los huecos por semana
 2º Instancia en SPD los huecos por día
 3º Instancia en NumDays la division entera de huecos por semana 
