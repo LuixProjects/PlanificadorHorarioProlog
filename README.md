@@ -311,6 +311,7 @@ constrain_subject(req(Class, Subj, _Teacher, _Num)-Slots) :-
         list_without_nths(Qs0, Seconds, Qs),
         strictly_ascending(Qs).
 ```
+El predicado *all_diff_from(Vs,F)* es cierto cuando los valores de F son distintos de todos los valores de Vs.
 
 ```prolog
 /*
@@ -321,10 +322,10 @@ all_diff_from(Vs, F) :-
         maplist(#\=(F), Vs).
 
 ```
-
+El predicado *constrain_class(Rs,Class)* es cierto cuando Class unifica con una lista de clases que cumplen las restricciones dadas por Rs.
+El predicado *constrain_teacher(Rs,Teachers)* es cierto cuando Teachers unifica con una lista de profesores que cumplen las restricciones de Rs.
 ```prolog
 /*
-Predicado que será cierto si Class unifica con una lista de clases que cumplen las restricciones Rs.
 1º Filtra según los requisitos los huecos que tiene cada clase para cada asignatura
 2º Guarda en Vs la lista vacía del par Clase-Asignatura 
 3º Restringe para sean únicos los valores de asignaturas de Vs
@@ -338,10 +339,7 @@ constrain_class(Rs, Class) :-
         all_different(Vs),
         findall(S, class_freeslot(Class,S), Frees),
         maplist(all_diff_from(Vs), Frees).
-```
 
-
-```prolog
 /*
 Predicado que será cierto si Teacher unifica con la Lista de profesores que cumplen las restricciones Rs.
 [tfilter filtra Rs por la condicion 
@@ -363,6 +361,8 @@ constrain_teacher(Rs, Teacher) :-
 
 ```
 
+
+
 ```prolog
 /*
 1º Comprueba que el par requisito-slot pertenece a la lista de requisitos Reqs
@@ -373,7 +373,7 @@ sameroom_var(Reqs, r(Class,Subject,Lesson), Var) :-
         nth0(Lesson, Slots, Var).
 ```
 
-
+El predicado *constrain_room(Reqs,Room)* es cierto cuando Room unifica con una lista de aulas que cumplen los requisitos dados por Reqs.
 ```prolog
 /*
 1º Busca las habitaciones que cumplan las restricciones RReqs
